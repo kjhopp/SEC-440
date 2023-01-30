@@ -43,7 +43,6 @@ set system conntrack Modules sqlnet
 set system conntrack Modules tftp
 set system console device ttyS0 speed '115200'
 set system host-name 'vyos1-katie'
-set system login user katie authentication encrypted-password '$6$xnaNYktLsKKc6F
 set system login user vyos authentication plaintext-password 
 set systeм nамe-server 10.0.17.2'
 set system ntp server time1.vyos.net 
@@ -99,7 +98,6 @@ set system conntrack Modules sqlnet
 set system conntrack Modules tftp
 set system console device ttyS0 speed '115200'
 set system host-name 'vyos2-katie'
-set system login user vyos authentication encrypted-password '$6$YUTCBnI17XuxPfv 
 set system login user vyos authentication plaintext-password set system name-server '10.0.17.2'
 set system ntp server time1.vyos.net
 set system ntp server time2.vyos.net

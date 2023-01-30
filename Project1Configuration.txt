@@ -1,1 +1,102 @@
-# This will have my final configuration for Project 1
+# Project 1 Configuration
+
+# vyos1 configuration
+
+set high-availability vrrp group A address 10.0.5.1/24 set high-availability vrrp group A hello-source-address '10.0.5.2' set high-availability vrrp group A interface 'eth1'
+set high-availability vrrp group A peer-address '10.0.5.3'
+set high-availability vrrp group A priority '50'
+set high-availability vrrp group A vrid '100'
+set high-availability vrrp group B address 10.0.17.112/24
+set high-availability vrrp group B hello-source-address '10.0.17.22'
+set high-availability vrrp group B interface 'eth0'
+set high-availability vrrp group B peer-address '18.8.17.82'
+set high-availability vrrp group B priority '50'
+set high-availability vrrp group B vrid '101'
+set interfaces ethernet eth0 address '10.0.17.22/24' 
+set interfaces ethernet eth0 description 'SEC440-WAN' 
+set interfaces ethernet eth0 hw-id '00:50:56:a1:cc:13' 
+set interfaces ethernet eth1 address '10.0.5.2/24' 
+set interfaces ethernet eth1 description 'SEC440-LAN' 
+set interfaces ethernet eth1 hw-id '00:50:56:a1:75: b5' 
+set interfaces loopback lo set nat destination rule 10 description 'http web01' 
+set nat destination rule 10 destination port '80'
+set nat destination rule 10 inbound-interface 'eth' 
+set nat destination rule 10 protocol 'tcp'
+set nat destination rule 10 translation address '10.0.5.100' 
+set nat destination rule 20 description 'WAN able to ssh to web81' set nat destination rule 20 destination port '22'
+set nat destination rule 20 inbound-interface 'eth0'
+set nat destination rule 20 protocol 'tcp'
+set nat destination rule 20 translation address '10.0.5.100'
+set nat source rule 10 description 'WAN to LAN'
+set nat source rule 10 outbound-interface 'eth0'
+set nat source rule 10 translation address 'Masquerade'
+set protocols static route 0.0.0.0/0 next-hop 18.0.17.2 
+set service dns forwarding allow-from '10.0.5.0/24' 
+set service dns forwarding listen-address '10.0.5.1' 
+set service dns forwarding listen-address '10.0.5.2' 
+set service ssh listen-address '0.0.0.0'
+set system config-Management coмmit-revisions '100' 
+set system conntrack Modules ftp set system conntrack Modules h323 
+set system conntrack Modules nfs set system conntrack Modules pptp 
+set system conntrack Modules sip
+set system conntrack Modules sqlnet
+set system conntrack Modules tftp
+set system console device ttyS0 speed '115200'
+set system host-name 'vyos1-katie'
+set system login user katie authentication encrypted-password '$6$xnaNYktLsKKc6F
+set system login user vyos authentication plaintext-password 
+set systeм nамe-server 10.0.17.2'
+set system ntp server time1.vyos.net 
+set system ntp server time2.vyos.net
+set system ntp server time3.vyos.net
+set system syslog global facility all level 'info'
+set system syslog global facility protocols level 'debug' 
+
+# vyos 2 configuration
+
+set high-availability vrrp group A address 10.0.5.1/24 set high-availability vrrp group A hello-source-address '10.0.5.3' set high-availability vrrp group A interface 'eth1'
+set high-availability vrrp group A peer-address '10.0.5.2'
+set high-availability vrrp group A priority '25'
+set high-availability vrrp group A vrid '100'
+set high-availability vrrp group B address 18.8.17.112/24
+set high-availability vrrp group B hello-source-address '10.0.17.82'
+set high-availability vrrp group B interface 'eth0'
+set high-availability vrrp group B peer-address '10.0.17.22'
+set high-availability vrrp group B priority '25'
+set high-availability vrrp group B vrid '101'
+set interfaces ethernet eth0 address '10.0.17.82/24' 
+set interfaces ethernet eth0 description 'SEC440-WAN' 
+set interfaces ethernet eth0 hw-id '00:50:56:a1:12:eb' 
+set interfaces ethernet eth1 address '10.0.5.3/24' 
+set interfaces ethernet eth1 description 'SEC440-WAN' 
+set interfaces ethernet eth1 hw-id '00:50:56:a1:12:67' 
+set interfaces loopback lo
+set nat destination rule 10 description 'http web01' 
+set nat destination rule 10 destination port '80' 
+set nat destination rule 10 inbound-interface 'eth0' 
+set nat destination rule 10 protocol 'tcp'
+set nat destination rule 10 translation address '10.0.5.100' 
+set nat destination rule 20 description 'WAN ssh to web81' 
+set nat destination rule 20 destination port '22'
+set nat destination rule 20 inbound-interface 'eth0'
+set nat destination rule 20 protocol 'tcp'
+set nat destination rule 20 translation address '10.0.5.100' 
+set nat source rule 10 outbound-interface 'eth0' 
+set nat source rule 18 source
+set nat source rule 18 translation address 'Masquerade' 
+set protocols static route 8.0.0.0/0 next-hop 10.0.17.2 
+set service dns forwarding allow-from '10.8.5.0/24' 
+set service dns forwarding listen-address '10.0.5.1' 
+set service dns forwarding listen-address '10.0.5.3' 
+set service ssh listen-address '0.0.0.0'
+set system config-Management commit-revisions '100' 
+set system conntrack Modules ftp 
+set system conntrack Modules h323 
+set system conntrack Modules nfs 
+set system conntrack Modules pptp 
+set system conntrack Modules sip
+set system conntrack Modules sqlnet
+set system conntrack Modules tftp
+set system console device ttyS0 speed '115200'
+set system host-name 'vyos2-katie'
+set system login user vyos authentication encrypted-password '$6$YUTCBnI17XuxPfv 

